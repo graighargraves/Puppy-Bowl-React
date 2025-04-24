@@ -30,7 +30,8 @@ function App() {
   <Routes>
     <Route path='/' element={<AllPlayers players={players} setPlayers={setPlayers}/>} />
     <Route path='/SinglePlayer' element={<SinglePlayer players={players} setPlayers={setPlayers}/>} />
-    <Route path='/NewPlayerForm' element={<NewPlayerForm />} />
+    <Route path='/players/:id' element={<SinglePlayer players={players}/>}/>
+    <Route path='/NewPlayerForm' element={<NewPlayerForm setPlayers={setPlayers} />} />
   </Routes>
 
 </div>

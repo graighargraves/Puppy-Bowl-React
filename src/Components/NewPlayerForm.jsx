@@ -1,12 +1,15 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
-function NewPlayerForm (){
+
+function NewPlayerForm ({setPlayers}){
+const navigate = useNavigate();   
 const [name, setName] = useState("")
 const [breed, setBreed] = useState("")
 const [status, setStatus] = useState("")
 const [imageUrl, setImageUrl] = useState("");
 
-const defaultImage = ""
+
 async function handleSubmit(event) {
     event.preventDefault()
     try{
@@ -21,11 +24,11 @@ async function handleSubmit(event) {
             })
         })
         const result = await response.json()
-        console.log("Response:", data)
-        setName("")
-        setBreed("")
-        setStatus("")
-        setImageUrl("")
+        const refresh = await fetch("https://fsa-puppy-bowl.herokuapp.com/api/2501-ftb-et-web-pt/players")
+        const updated = await refresh.json()
+        setPlayers(updated.data.players)
+        navigate("/")
+       
     } catch (error){
         console.error("Error adding players", error)
     }
